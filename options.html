@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>ユーザー設定</h1>
+    <div id="step1">
+      <h2>Step1. 行きたい経路を入力しよう</h2>
+      <p id="dp_station">出発駅（必須）<input type="text" name="dp_station" value="高円寺"></p>
+      <p id="ar_station">到着駅（必須）<input type="text" name="ar_station" value="相模原"></p>
+      <p id="via_station">経由駅（任意）<input type="text" name="via_station" value="八王子"></p>
+      <button id="station_check">check!</button>
+    </div>
+    <div id="step2"></div>
+    <div id="step3">
+      <h2 id="save_succeed"></h2>
+      <p id="saved_stations"></p>
+    </div>
+
+    <script src="javascript/options.js"></script>
+  </body>
+</html>
