@@ -55,7 +55,7 @@ function showViaList() {
 // webAPIの呼び出し
 function httpRequest() {
   var request = new XMLHttpRequest();
-  var request_url = localStorage['vla'] ? "http://latest.api.ekispert.com/v1/json/search/course/extreme?key=" + key + "&viaList=" + ls['dp']['code'] + ":" + ls['via']['code'] + ":" +  ls['ar']['code'] + "&answerCount=3" : "http://latest.api.ekispert.com/v1/json/search/course/extreme?key=" + key + "&viaList=" + ls['dp']['code'] + ":" +  ls['ar']['code'] + "&answerCount=3";
+  var request_url = localStorage['vla'] ? "http://latest.api.ekispert.com/v1/json/search/course/extreme?key=" + accessKey() + "&viaList=" + ls['dp']['code'] + ":" + ls['via']['code'] + ":" +  ls['ar']['code'] + "&answerCount=3" : "http://latest.api.ekispert.com/v1/json/search/course/extreme?key=" + accessKey() + "&viaList=" + ls['dp']['code'] + ":" +  ls['ar']['code'] + "&answerCount=3";
   request.open("GET", request_url, false)
   request.send();
   return (new Function("return " + request.responseText))();
