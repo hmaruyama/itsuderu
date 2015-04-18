@@ -24,20 +24,14 @@ console.log(courseList);
 onload = function() {
   if (localStorage.dp && localStorage.ar) {
     document.getElementById('station').textContent = showViaList();
-    var now = new Date();
-    // var now = moment();
+    var now = moment();
     var diff = [];
     for (var i = 0; i < courseList.length; i++) {
-      diff[i] = courseList[i].dp_datetime.getMinutes() - now.getMinutes();
-      if (diff[i] < 0) {
-        diff[i] = 60 + diff[i];
-      };
-      var result = "所要時間"+ courseList[i].total_time + "分 " + " あと" + diff[i] + "分 " + doubleDigits(courseList[i].dp_datetime.getHours()) + ":" + doubleDigits(courseList[i].dp_datetime.getMinutes()) + "〜" + doubleDigits(courseList[i].ar_datetime.getHours()) + ":" + doubleDigits(courseList[i].ar_datetime.getMinutes());
+      diff[i] = courseList[i].dp_datetime.diff(now, 'minutes');
+      var result = "所要時間"+ courseList[i].total_time + "分 " + " あと" + diff[i] + "分 " + doubleDigits(courseList[i].dp_datetime.hours()) + ":" + doubleDigits(courseList[i].dp_datetime.minutes()) + "〜" + doubleDigits(courseList[i].ar_datetime.hours()) + ":" + doubleDigits(courseList[i].ar_datetime.minutes());
       var p = document.createElement('p');
       var a = document.createElement('a');
       var target = a.setAttribute('target', 'blank');
-      var minute1 = Number(courseList[i].dp_datetime.getMinutes() - (Math.floor(courseList[i].dp_datetime.getMinutes() / 10) * 10));
-      // var roote = "http://roote.ekispert.net/result?dep_code=" + ls.dp.code + "&arr_code=" + ls.ar.code + "&submit.x=108&submit.y=16&dep=" + ls.dp.name + "&arr=" + ls.ar.name + "&via1=" + ls.via.name + "&yyyymm=" + courseList[i].dp_datetime.getFullYear().toString() + doubleDigits((courseList[i].dp_datetime.getMonth() + 1)) + "&day=" + courseList[i].dp_datetime.getDate() + "&hour=" + courseList[i].dp_datetime.getHours() + "&minute10=" + Math.floor(courseList[i].dp_datetime.getMinutes() / 10) + "&minute1=" + minute1 + "&type=dep&sort=time&transfer=2&surcharge=3&shinkansen=true&express=true&local=true&highway=true&plane=true&connect=true&liner=true&sleep=true&ship=true";
       var path = '/search/course/light';
       var params;
       if (ls.via.code) {
@@ -45,13 +39,17 @@ onload = function() {
           key: key(),
           from: ls.dp.code,
           to: ls.ar.code,
-          via: ls.via.code
+          via: ls.via.code,
+          date: courseList[i].dp_datetime.format('YYYYMMDD'),
+          time: courseList[i].dp_datetime.format('HHmm')
         };
       } else {
         params = {
           key: key(),
           from: ls.dp.code,
-          to: ls.ar.code
+          to: ls.ar.code,
+          date: courseList[i].dp_datetime.format('YYYYMMDD'),
+          time: courseList[i].dp_datetime.format('HHmm')
         };
       };
 
@@ -79,8 +77,6 @@ function showViaList() {
   var dp_ar_stations = ls.dp.name + " => " + ls.ar.name;
   return ls.via.name ? dp_ar_stations + "  " + ls.via.name + "経由 " : dp_ar_stations;
 }
-
-
 
 // webAPIの呼び出し
 function getResponse(path, params) {
@@ -112,14 +108,14 @@ function createCourseList(response) {
         var length = response[i].Route.Line.length;
         course[i] = {
           total_time: Number(response[i].Route.timeOnBoard) + Number(response[i].Route.timeOther) + Number(response[i].Route.timeWalk),
-          dp_datetime: new Date(response[i].Route.Line[0].DepartureState.Datetime.text),
-          ar_datetime: new Date(response[i].Route.Line[length-1].ArrivalState.Datetime.text)
+          dp_datetime: moment(response[i].Route.Line[0].DepartureState.Datetime.text),
+          ar_datetime: moment(response[i].Route.Line[length-1].ArrivalState.Datetime.text)
         };
       } else {
         course[i] = {
           total_time: Number(response[i].Route.timeOnBoard) + Number(response[i].Route.timeOther) + Number(response[i].Route.timeWalk),
-          dp_datetime: new Date(response[i].Route.Line.DepartureState.Datetime.text),
-          ar_datetime: new Date(response[i].Route.Line.ArrivalState.Datetime.text)
+          dp_datetime: moment(response[i].Route.Line.DepartureState.Datetime.text),
+          ar_datetime: moment(response[i].Route.Line.ArrivalState.Datetime.text)
         };
       };
     };
@@ -128,14 +124,14 @@ function createCourseList(response) {
       var length = response.Route.Line.length;
       course[0] = {
         total_time: Number(response.Route.timeOnBoard) + Number(response.Route.timeOther) + Number(response.Route.timeWalk),
-        dp_datetime: new Date(response.Route.Line[0].DepartureState.Datetime.text),
-        ar_datetime: new Date(response.Route.Line[length-1].ArrivalState.Datetime.text)
+        dp_datetime: moment(response.Route.Line[0].DepartureState.Datetime.text),
+        ar_datetime: moment(response.Route.Line[length-1].ArrivalState.Datetime.text)
       };
     } else {
       course[0] = {
         total_time: Number(response.Route.timeOnBoard) + Number(response.Route.timeOther) + Number(response.Route.timeWalk),
-        dp_datetime: new Date(response.Route.Line.DepartureState.Datetime.text),
-        ar_datetime: new Date(response.Route.Line[length-1].ArrivalState.Datetime.text)
+        dp_datetime: moment(response.Route.Line.DepartureState.Datetime.text),
+        ar_datetime: moment(response.Route.Line[length-1].ArrivalState.Datetime.text)
       };
     };
   } else {
