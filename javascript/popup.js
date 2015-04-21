@@ -4,6 +4,7 @@ var ls = {
   via: {code: {}, name: {}},
 };
 
+値をセットするメソッド作る
 ls = {
   dp: firstStoreLocalStorage('dp'),
   ar: firstStoreLocalStorage('ar'),
