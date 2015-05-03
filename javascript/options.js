@@ -103,7 +103,7 @@ function showViaList() {
 function httpRequest(station) {
   var request = new XMLHttpRequest();
   console.log(station);
-  request.open("GET", "http://latest.api.ekispert.com/v1/json/station/light?key=" + accessKey() + "&name=" + station, false);
+  request.open("GET", "http://latest.api.ekispert.com/v1/json/station/light?key=" + key() + "&name=" + station, false);
   request.send();
   return (new Function("return " + request.responseText))();
 }
