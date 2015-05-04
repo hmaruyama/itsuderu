@@ -1,19 +1,8 @@
+var ls = setLs();
+
 var dp_station = document.getElementsByName('dp_station')[0];
 var ar_station = document.getElementsByName('ar_station')[0];
 var via_station = document.getElementsByName('via_station')[0];
-
-var ls = {
-  dp: {},
-  ar: {},
-  via: {},
-};
-
-ls = {
-  dp: firstStoreLocalStorage('dp'),
-  ar: firstStoreLocalStorage('ar'),
-  via: firstStoreLocalStorage('via')
-};
-
 
 document.getElementById('station_check').onclick = function() {
   if (dp_station.value && ar_station.value) {
@@ -21,7 +10,6 @@ document.getElementById('station_check').onclick = function() {
     document.getElementById('step2').appendChild(h2).textContent = 'Step2. 駅を選択しよう';
     showStationList(dp_station, "出発地", 'dp_station');
     showStationList(ar_station, "到着地", 'ar_station');
-    console.log(via_station.value + "は、ありますか？");
     via_station.value ? showStationList(via_station, "経由地", 'via_station') : 0;
     var button = document.createElement('button');
     button.setAttribute('id', 'save');
@@ -37,9 +25,7 @@ document.getElementById('station_check').onclick = function() {
   }
 };
 
-function firstStoreLocalStorage(local_storage) {
-  return ls[local_storage] = localStorage[local_storage] ? JSON.parse(localStorage[local_storage]) : {};
-}
+showSavedStations();
 
 function secondStoreLocalStorage(id, local_storage) {
   var select = document.getElementById(id);
@@ -82,39 +68,27 @@ function showStationList(elementbyid, text, name) {
 //   };
 // }
 
-onload = function() {
-  showSavedStations();
-}
-
-
 // 設定した設定を表示
 function showSavedStations() {
-  if (localStorage['dp'] && localStorage['ar']) {
-    console.log(ls['dp']);
+  if (ls.dp && ls.ar) {
     document.getElementById('save_succeed').textContent = '現在の設定';
     document.getElementById('saved_stations').textContent = showViaList();
   };
 }
 
-// 設定経路の表示
-function showViaList() {
-  var dp_ar_stations = ls['dp']['name'] + " => " + ls['ar']['name'];
-  return via_station.value ? dp_ar_stations + " " + ls['via']['name'] + "経由" : dp_ar_stations;
-}
-
 function stationList(response) {
   var stations = new Array();
-  if (response['ResultSet']['Point'] instanceof Array) {
-    for (var i = 0; i < response['ResultSet']['Point'].length; i++) {
+  if (response.ResultSet.Point instanceof Array) {
+    for (var i = 0; i < response.ResultSet.Point.length; i++) {
       stations[i] = {
-        name: response['ResultSet']['Point'][i]['Station']['Name'],
-        code: response['ResultSet']['Point'][i]['Station']['code']
+        name: response.ResultSet.Point[i].Station.Name,
+        code: response.ResultSet.Point[i].Station.code
       };
     };
-  } else if (response['ResultSet']['Point'] instanceof Object) {
+  } else if (response.ResultSet.Point instanceof Object) {
       stations[0] = {
-        name: response['ResultSet']['Point']['Station']['Name'],
-        code: response['ResultSet']['Point']['Station']['code']
+        name: response.ResultSet.Point.Station.Name,
+        code: response.ResultSet.Point.Station.code
       };
   } else {
   };
