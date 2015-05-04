@@ -13,7 +13,7 @@ console.log(courseList);
 
 onload = function() {
   if (ls.dp && ls.ar) {
-    document.getElementById('station').textContent = showViaList(ls.via.name);
+    document.getElementById('station').textContent = showViaList();
     var now = moment();
     var diff = [];
     for (var i = 0; i < courseList.length; i++) {

@@ -19,9 +19,9 @@ function getResponse(path, params) {
 }
 
 // 設定経路の表示
-function showViaList(via) {
+function showViaList() {
   var dp_ar_stations = ls.dp.name + " => " + ls.ar.name;
-  return via ? dp_ar_stations + " " + ls.via.name + "経由" : dp_ar_stations;
+  return ls.via.name ? dp_ar_stations + " " + ls.via.name + "経由" : dp_ar_stations;
 }
 
 // lsの初期化

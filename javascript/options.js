@@ -74,7 +74,7 @@ function showSavedStations() {
   if (ls.dp && ls.ar) {
     console.log(ls.dp);
     document.getElementById('save_succeed').textContent = '現在の設定';
-    document.getElementById('saved_stations').textContent = showViaList(via_station.value);
+    document.getElementById('saved_stations').textContent = showViaList();
   };
 }
 
