@@ -1,19 +1,8 @@
+var ls = setLs();
+
 var dp_station = document.getElementsByName('dp_station')[0];
 var ar_station = document.getElementsByName('ar_station')[0];
 var via_station = document.getElementsByName('via_station')[0];
-
-var ls = {
-  dp: {},
-  ar: {},
-  via: {},
-};
-
-ls = {
-  dp: firstStoreLocalStorage('dp'),
-  ar: firstStoreLocalStorage('ar'),
-  via: firstStoreLocalStorage('via')
-};
-
 
 document.getElementById('station_check').onclick = function() {
   if (dp_station.value && ar_station.value) {
@@ -36,10 +25,6 @@ document.getElementById('station_check').onclick = function() {
 
   }
 };
-
-function firstStoreLocalStorage(local_storage) {
-  return ls[local_storage] = localStorage[local_storage] ? JSON.parse(localStorage[local_storage]) : {};
-}
 
 function secondStoreLocalStorage(id, local_storage) {
   var select = document.getElementById(id);

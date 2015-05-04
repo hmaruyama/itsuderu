@@ -1,17 +1,7 @@
-var ls = {
-  dp: {code: {}, name: {}},
-  ar: {code: {}, name: {}},
-  via: {code: {}, name: {}},
-};
-
-ls = {
-  dp: firstStoreLocalStorage('dp'),
-  ar: firstStoreLocalStorage('ar'),
-  via: firstStoreLocalStorage('via')
-};
+var ls = setLs();
 
 var path = '/search/course/extreme'
-var via_list = localStorage.via ? ls.dp.code + ":" + ls.via.code + ":" +  ls.ar.code : ls.dp.code + ":" +  ls.ar.code;
+var via_list = ls.via ? ls.dp.code + ":" + ls.via.code + ":" +  ls.ar.code : ls.dp.code + ":" +  ls.ar.code;
 var params = {
   key: key(),
   viaList: via_list,
@@ -22,7 +12,7 @@ var courseList = createCourseList(getResponse(path, params));
 console.log(courseList);
 
 onload = function() {
-  if (localStorage.dp && localStorage.ar) {
+  if (ls.dp && ls.ar) {
     document.getElementById('station').textContent = showViaList(ls.via.name);
     var now = moment();
     var diff = [];
@@ -61,11 +51,6 @@ onload = function() {
     };
   };
 };
-
-// localStrageへの代入
-function firstStoreLocalStorage(local_storage) {
-  return ls[local_storage] = localStorage[local_storage] ? JSON.parse(localStorage[local_storage]) : {};
-}
 
 // 頭に0を入れる
 function doubleDigits(num) {
