@@ -78,26 +78,6 @@ function showViaList() {
   return ls.via.name ? dp_ar_stations + "  " + ls.via.name + "経由 " : dp_ar_stations;
 }
 
-// webAPIの呼び出し
-function getResponse(path, params) {
-  var response;
-  $.ajax({
-    type: 'GET',
-    url: 'http://latest.api.ekispert.com/v1/json' + path,
-    data: decodeURIComponent($.param(params)),
-    dataType: 'json',
-    async: false
-  })
-  .done(function(data) {
-    response = data;
-  })
-  .fail(function(XHR, textStatus, errorThrown) {
-    alert(errorThrown);
-  });
-  console.log(response);
-  return response;
-}
-
 // コースリストの作成
 function createCourseList(response) {
   var course = new Array();
