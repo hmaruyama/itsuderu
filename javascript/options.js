@@ -26,6 +26,8 @@ document.getElementById('station_check').onclick = function() {
   }
 };
 
+showSavedStations();
+
 function secondStoreLocalStorage(id, local_storage) {
   var select = document.getElementById(id);
   var selected_index = select.selectedIndex;
@@ -67,14 +69,9 @@ function showStationList(elementbyid, text, name) {
 //   };
 // }
 
-onload = function() {
-  showSavedStations();
-}
-
-
 // 設定した設定を表示
 function showSavedStations() {
-  if (localStorage.dp && localStorage.ar) {
+  if (ls.dp && ls.ar) {
     console.log(ls.dp);
     document.getElementById('save_succeed').textContent = '現在の設定';
     document.getElementById('saved_stations').textContent = showViaList(via_station.value);
