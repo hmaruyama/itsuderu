@@ -89,8 +89,8 @@ onload = function() {
 
 // 設定した設定を表示
 function showSavedStations() {
-  if (localStorage['dp'] && localStorage['ar']) {
-    console.log(ls['dp']);
+  if (localStorage.dp && localStorage.ar) {
+    console.log(ls.dp);
     document.getElementById('save_succeed').textContent = '現在の設定';
     document.getElementById('saved_stations').textContent = showViaList();
   };
@@ -98,23 +98,23 @@ function showSavedStations() {
 
 // 設定経路の表示
 function showViaList() {
-  var dp_ar_stations = ls['dp']['name'] + " => " + ls['ar']['name'];
-  return via_station.value ? dp_ar_stations + " " + ls['via']['name'] + "経由" : dp_ar_stations;
+  var dp_ar_stations = ls.dp.name + " => " + ls.ar.name;
+  return via_station.value ? dp_ar_stations + " " + ls.via.name + "経由" : dp_ar_stations;
 }
 
 function stationList(response) {
   var stations = new Array();
-  if (response['ResultSet']['Point'] instanceof Array) {
-    for (var i = 0; i < response['ResultSet']['Point'].length; i++) {
+  if (response.ResultSet.Point instanceof Array) {
+    for (var i = 0; i < response.ResultSet.Point.length; i++) {
       stations[i] = {
-        name: response['ResultSet']['Point'][i]['Station']['Name'],
-        code: response['ResultSet']['Point'][i]['Station']['code']
+        name: response.ResultSet.Point[i].Station.Name,
+        code: response.ResultSet.Point[i].Station.code
       };
     };
-  } else if (response['ResultSet']['Point'] instanceof Object) {
+  } else if (response.ResultSet.Point instanceof Object) {
       stations[0] = {
-        name: response['ResultSet']['Point']['Station']['Name'],
-        code: response['ResultSet']['Point']['Station']['code']
+        name: response.ResultSet.Point.Station.Name,
+        code: response.ResultSet.Point.Station.code
       };
   } else {
   };
