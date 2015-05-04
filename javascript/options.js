@@ -51,9 +51,12 @@ function secondStoreLocalStorage(id, local_storage) {
   ls[local_storage] = JSON.parse(localStorage[local_storage]);
 }
 
-
 function showStationList(elementbyid, text, name) {
-  var station_list = stationList(httpRequest(elementbyid.value));
+  var params = {
+    key: key(),
+    name: elementbyid.value
+  };
+  var station_list = stationList(getResponse('/station/light', params));
   var form = document.createElement('form');
   form.setAttribute('name', name);
   form.setAttribute('id', name + '_form');
@@ -97,15 +100,6 @@ function showSavedStations() {
 function showViaList() {
   var dp_ar_stations = ls['dp']['name'] + " => " + ls['ar']['name'];
   return via_station.value ? dp_ar_stations + " " + ls['via']['name'] + "経由" : dp_ar_stations;
-}
-
-// webAPIの呼び出し
-function httpRequest(station) {
-  var request = new XMLHttpRequest();
-  console.log(station);
-  request.open("GET", "http://latest.api.ekispert.com/v1/json/station/light?key=" + key() + "&name=" + station, false);
-  request.send();
-  return (new Function("return " + request.responseText))();
 }
 
 function stationList(response) {
