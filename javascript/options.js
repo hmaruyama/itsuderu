@@ -92,14 +92,8 @@ function showSavedStations() {
   if (localStorage.dp && localStorage.ar) {
     console.log(ls.dp);
     document.getElementById('save_succeed').textContent = '現在の設定';
-    document.getElementById('saved_stations').textContent = showViaList();
+    document.getElementById('saved_stations').textContent = showViaList(via_station.value);
   };
-}
-
-// 設定経路の表示
-function showViaList() {
-  var dp_ar_stations = ls.dp.name + " => " + ls.ar.name;
-  return via_station.value ? dp_ar_stations + " " + ls.via.name + "経由" : dp_ar_stations;
 }
 
 function stationList(response) {

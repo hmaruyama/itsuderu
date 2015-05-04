@@ -23,7 +23,7 @@ console.log(courseList);
 
 onload = function() {
   if (localStorage.dp && localStorage.ar) {
-    document.getElementById('station').textContent = showViaList();
+    document.getElementById('station').textContent = showViaList(ls.via.name);
     var now = moment();
     var diff = [];
     for (var i = 0; i < courseList.length; i++) {
@@ -70,12 +70,6 @@ function firstStoreLocalStorage(local_storage) {
 // 頭に0を入れる
 function doubleDigits(num) {
   return Number(num) < 10 ? "0" + num.toString() : num;
-}
-
-// 設定経路の表示
-function showViaList() {
-  var dp_ar_stations = ls.dp.name + " => " + ls.ar.name;
-  return ls.via.name ? dp_ar_stations + "  " + ls.via.name + "経由 " : dp_ar_stations;
 }
 
 // コースリストの作成
