@@ -14,7 +14,6 @@ function getResponse(path, params) {
   .fail(function(XHR, textStatus, errorThrown) {
     alert(errorThrown);
   });
-  console.log(response);
   return response;
 }
 
@@ -31,7 +30,6 @@ function setLs() {
     ar: {code: {}, name: {}},
     via: {code: {}, name: {}},
   };
-  console.log(ls);
   ls = {
     dp: firstStoreLocalStorage('dp'),
     ar: firstStoreLocalStorage('ar'),
@@ -41,7 +39,6 @@ function setLs() {
 
   // localStrageへの代入
   function firstStoreLocalStorage(local_storage) {
-    console.log(ls);
     return ls[local_storage] = localStorage[local_storage] ? JSON.parse(localStorage[local_storage]) : {};
   }
 }

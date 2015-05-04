@@ -10,7 +10,6 @@ document.getElementById('station_check').onclick = function() {
     document.getElementById('step2').appendChild(h2).textContent = 'Step2. 駅を選択しよう';
     showStationList(dp_station, "出発地", 'dp_station');
     showStationList(ar_station, "到着地", 'ar_station');
-    console.log(via_station.value + "は、ありますか？");
     via_station.value ? showStationList(via_station, "経由地", 'via_station') : 0;
     var button = document.createElement('button');
     button.setAttribute('id', 'save');
@@ -72,7 +71,6 @@ function showStationList(elementbyid, text, name) {
 // 設定した設定を表示
 function showSavedStations() {
   if (ls.dp && ls.ar) {
-    console.log(ls.dp);
     document.getElementById('save_succeed').textContent = '現在の設定';
     document.getElementById('saved_stations').textContent = showViaList();
   };

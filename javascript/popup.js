@@ -9,7 +9,6 @@ var params = {
 }
 
 var courseList = createCourseList(getResponse(path, params));
-console.log(courseList);
 
 onload = function() {
   if (ls.dp && ls.ar) {
