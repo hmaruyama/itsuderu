@@ -2,7 +2,7 @@
   "name": "いつ出る？",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "ワンアクションで、何時に会社を出ればスムーズに電車移動できるのかわかるアプリ。",
+  "description": "ワンアクションで、何時に会社を出ればスムーズに電車移動できるのか分かるアプリ。",
   "browser_action": {
     "default_icon": "icon.png",
     "default_title": "いつ出る？",
