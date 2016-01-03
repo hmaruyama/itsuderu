@@ -3,7 +3,6 @@ var ls = setLs();
 var path = '/search/course/extreme'
 var via_list = ls.via ? ls.dp.code + ":" + ls.via.code + ":" +  ls.ar.code : ls.dp.code + ":" +  ls.ar.code;
 var params = {
-  key: key(),
   viaList: via_list,
   answerCount: 3
 }
@@ -25,7 +24,6 @@ onload = function() {
       var params;
       if (ls.via.code) {
         params = {
-          key: key(),
           from: ls.dp.code,
           to: ls.ar.code,
           via: ls.via.code,
@@ -34,7 +32,6 @@ onload = function() {
         };
       } else {
         params = {
-          key: key(),
           from: ls.dp.code,
           to: ls.ar.code,
           date: courseList[i].dp_datetime.format('YYYYMMDD'),
