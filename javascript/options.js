@@ -1,5 +1,11 @@
 var ls = setLs();
 
+// テキストボックスの初期値設定
+$('#dp_station').val(ls.dp.name);
+$('#ar_station').val(ls.ar.name);
+$('#via_station').val(ls.via.name);
+
+
 document.getElementById('station_check').onclick = function() {
   var dp_station = $('#dp_station').val();
   var ar_station = $('#ar_station').val();
