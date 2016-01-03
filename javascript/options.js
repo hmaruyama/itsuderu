@@ -23,13 +23,18 @@ document.getElementById('station_check').onclick = function() {
   document.getElementById('save').onclick = function() {
     secondStoreLocalStorage('dp_station_select', 'dp');
     secondStoreLocalStorage('ar_station_select', 'ar');
-    via_station ? secondStoreLocalStorage('via_station_select', 'via') : 0;
+    via_station ? secondStoreLocalStorage('via_station_select', 'via') : removeLocalStrage('via');
     showSavedStations();
 
   }
 };
 
 showSavedStations();
+
+function removeLocalStrage(local_storage) {
+  localStorage.removeItem(local_storage);
+  ls[local_storage] = {};
+}
 
 function secondStoreLocalStorage(id, local_storage) {
   var select = document.getElementById(id);
