@@ -60,7 +60,8 @@ function showStationList(station_name, text, name) {
 
 // 設定した設定を表示
 function showSavedStations() {
-  if (ls.dp && ls.ar) {
+  // 出発駅または到着駅が設定されていなければ表示しない
+  if (ls.dp.code != undefined && ls.ar.code != undefined) {
     $('h2#save_succeed').text('現在の設定');
     $('p#saved_stations').text(showViaList());
   };
