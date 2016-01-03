@@ -11,15 +11,15 @@ var courseList = createCourseList(getResponse(path, params));
 
 onload = function() {
   if (ls.dp && ls.ar) {
-    document.getElementById('station').textContent = showViaList();
+
+    // 設定した経路の表示
+    $('p#station').text(showViaList());
+
     var now = moment();
     var diff = [];
     for (var i = 0; i < courseList.length; i++) {
       diff[i] = courseList[i].dp_datetime.diff(now, 'minutes');
       var result = "所要時間"+ courseList[i].total_time + "分 " + " あと" + diff[i] + "分 " + doubleDigits(courseList[i].dp_datetime.hours()) + ":" + doubleDigits(courseList[i].dp_datetime.minutes()) + "〜" + doubleDigits(courseList[i].ar_datetime.hours()) + ":" + doubleDigits(courseList[i].ar_datetime.minutes());
-      var p = document.createElement('p');
-      var a = document.createElement('a');
-      var target = a.setAttribute('target', 'blank');
       var path = '/search/course/light';
       var params;
       if (ls.via.code) {
@@ -41,9 +41,8 @@ onload = function() {
 
       var roote = getResponse(path, params).ResultSet.ResourceURI;
 
-      var href = a.setAttribute('href', roote)
-      var text = document.createTextNode(result.toString());
-      document.getElementById('course_list').appendChild(p).appendChild(a).appendChild(text);
+      // 経路探索結果の簡易表示
+      $('div#course_list').append('<p><a target="blank" href="' + roote + '">' + result + '</a></p>');
     };
   };
 };
