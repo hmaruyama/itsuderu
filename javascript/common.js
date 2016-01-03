@@ -3,8 +3,11 @@ function getResponse(path, params) {
   var response;
   $.ajax({
     type: 'GET',
-    url: 'http://api.ekispert.jp/v1/json' + path,
+    url: 'https://er2pf9h3ie.execute-api.ap-northeast-1.amazonaws.com/prod' + path,
     data: decodeURIComponent($.param(params)),
+    headers: {
+      'Content-Type': 'application/json'
+    },
     dataType: 'json',
     async: false
   })

@@ -39,7 +39,6 @@ function secondStoreLocalStorage(id, local_storage) {
 
 function showStationList(elementbyid, text, name) {
   var params = {
-    key: key(),
     name: elementbyid.value
   };
   var station_list = stationList(getResponse('/station/light', params));
