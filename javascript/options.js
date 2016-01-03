@@ -47,14 +47,6 @@ function showStationList(station_name, text, name) {
   };
 }
 
-// function secondShowStationList(elementbyid) {
-//   var station_list = stationList(httpRequest(elementbyid.value));
-//   for (var i = 0; i < station_list.length; i++) {
-//     var option = document.getElementById('dp_station_select');
-//     // document.getElementById('step2').form.select.
-//   };
-// }
-
 // 設定した設定を表示
 function showSavedStations() {
   if (ls.dp && ls.ar) {
