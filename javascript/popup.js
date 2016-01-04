@@ -1,7 +1,7 @@
 var ls = setLs();
 
 var path = '/search/course/extreme'
-var via_list = ls.via ? ls.dp.code + ":" + ls.via.code + ":" +  ls.ar.code : ls.dp.code + ":" +  ls.ar.code;
+var via_list = ls.via.code ? ls.dp.code + ":" + ls.via.code + ":" +  ls.ar.code : ls.dp.code + ":" +  ls.ar.code;
 var params = {
   viaList: via_list,
   answerCount: 3
@@ -21,23 +21,15 @@ onload = function() {
       diff[i] = courseList[i].dp_datetime.diff(now, 'minutes');
       var result = "所要時間"+ courseList[i].total_time + "分 " + " あと" + diff[i] + "分 " + doubleDigits(courseList[i].dp_datetime.hours()) + ":" + doubleDigits(courseList[i].dp_datetime.minutes()) + "〜" + doubleDigits(courseList[i].ar_datetime.hours()) + ":" + doubleDigits(courseList[i].ar_datetime.minutes());
       var path = '/search/course/light';
-      var params;
-      if (ls.via.code) {
-        params = {
-          from: ls.dp.code,
-          to: ls.ar.code,
-          via: ls.via.code,
-          date: courseList[i].dp_datetime.format('YYYYMMDD'),
-          time: courseList[i].dp_datetime.format('HHmm')
-        };
-      } else {
-        params = {
-          from: ls.dp.code,
-          to: ls.ar.code,
-          date: courseList[i].dp_datetime.format('YYYYMMDD'),
-          time: courseList[i].dp_datetime.format('HHmm')
-        };
+      var params = {
+        from: ls.dp.code,
+        to: ls.ar.code,
+        date: courseList[i].dp_datetime.format('YYYYMMDD'),
+        time: courseList[i].dp_datetime.format('HHmm')
       };
+
+      // 経由地を設定している場合はviaパラメータを追加
+      if(ls.via.code) params.via = ls.via.code;
 
       var roote = getResponse(path, params).ResultSet.ResourceURI;
 
