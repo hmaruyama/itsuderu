@@ -1,7 +1,7 @@
 var ls = setLs();
 
 var path = '/search/course/extreme'
-var via_list = ls.via ? ls.dp.code + ":" + ls.via.code + ":" +  ls.ar.code : ls.dp.code + ":" +  ls.ar.code;
+var via_list = ls.via.code ? ls.dp.code + ":" + ls.via.code + ":" +  ls.ar.code : ls.dp.code + ":" +  ls.ar.code;
 var params = {
   viaList: via_list,
   answerCount: 3
