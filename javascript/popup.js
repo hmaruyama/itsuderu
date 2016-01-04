@@ -10,7 +10,7 @@ var params = {
 var courseList = createCourseList(getResponse(path, params));
 
 onload = function() {
-  if (ls.dp && ls.ar) {
+  if (ls.dp.code && ls.ar.code) {
 
     // 設定した経路の表示
     $('p#station').text(showViaList());
